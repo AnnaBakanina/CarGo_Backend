@@ -1,4 +1,10 @@
+using Backend.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CarGODbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
