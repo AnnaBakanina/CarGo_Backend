@@ -1,0 +1,14 @@
+# Білд-файли
+bin/
+obj/
+
+# Rider/JetBrains IDE
+.idea/
+*.DotSettings.user
+
+# Системні файли
+.DS_Store
+
+# Файли конфігурації (якщо містять секрети)
+# appsettings.json
+# appsettings.Development.json
