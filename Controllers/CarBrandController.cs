@@ -1,27 +1,27 @@
+using AutoMapper;
+using Backend.Controllers.Resources;
 using Backend.Models;
 using Backend.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers;
 
 public class CarBrandController: Controller
 {
-    private readonly CarGODbContext _dbContext;
+    private readonly CarGoDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public CarBrandController(CarGODbContext dbContext)
+    public CarBrandController(CarGoDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
+        _mapper = mapper;
     }
     
     [HttpGet("/car-brands")]
-    public IEnumerable<CarBrands> GetBrands()
+    public async Task<IEnumerable<CarBrandResource>> GetBrands()
     {
-        return null;
-        // return _dbContext.CarBrands.Include(m => m.CarModels).ToList <- check if only ToListAsync can be used. Then:
+        var brands = await _dbContext.Brands.Include(m => m.CarModel).ToListAsync();
+        return _mapper.Map<IEnumerable<CarBrandResource>>(brands);
     }
-    
-    // public async Task<IEnumerable<CarBrands>> GetBrends()
-    // {
-    //     return await _dbContext.CarBrands.Include(m => m.CarModels).ToListAsync();
-    // }
 }
