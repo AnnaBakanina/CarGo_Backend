@@ -10,5 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<CarBrands, CarBrandResource>();
         CreateMap<CarModel, CarModelResource>();
+        CreateMap<CarBodyType, CarBodyTypeResource>();
     }
 }
