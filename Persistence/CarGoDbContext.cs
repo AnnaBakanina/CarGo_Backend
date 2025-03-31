@@ -12,7 +12,7 @@ public class CarGoDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<CarModel> CarModels { get; set; }
     public DbSet<CarType> CarTypes { get; set; }
-    public DbSet<CarBodyType> CarBodyTypes { get; set; }
     public DbSet<TechState> TechStates { get; set; }
     public DbSet<Region> Regions { get; set; }
+    public DbSet<City> City { get; set; }
 }
