@@ -27,12 +27,4 @@ public class VehicleController: ControllerBase
         var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
         return Ok(result);
     }
-    
-    
-    // [HttpPost]
-    // public IActionResult CreateVehicle([FromBody] VehicleResource vehicleResource)
-    // {
-    //     var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
-    //     return Ok(vehicle);
-    // }
 }
