@@ -8,11 +8,30 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        // Domain to API Resource
         CreateMap<CarBrands, CarBrandResource>();
         CreateMap<CarModel, CarModelResource>();
         CreateMap<CarType, CarTypeResource>();
         CreateMap<TechState, TechStateResource>();
         CreateMap<City, CityResource>();
         CreateMap<Region, RegionResource>();
+        CreateMap<Vehicle, VehicleResource>();
+        
+        // API Resource to Domain model
+        CreateMap<VehicleResource, Vehicle>()
+            .ForMember(v => v.Id, opt => opt.Ignore()) // Id не змінюємо при створенні
+            .ForMember(v => v.UserId, opt => opt.MapFrom(vr => vr.UserId))
+            .ForMember(v => v.ModelId, opt => opt.MapFrom(vr => vr.ModelId))
+            .ForMember(v => v.CarTypeId, opt => opt.MapFrom(vr => vr.CarTypeId))
+            .ForMember(v => v.TechStateId, opt => opt.MapFrom(vr => vr.TechStateId))
+            .ForMember(v => v.YearOfRelease, opt => opt.MapFrom(vr => vr.YearOfRelease))
+            .ForMember(v => v.VINNumber, opt => opt.MapFrom(vr => vr.VINNumber))
+            .ForMember(v => v.CarMileage, opt => opt.MapFrom(vr => vr.CarMileage))
+            .ForMember(v => v.Description, opt => opt.MapFrom(vr => vr.Description))
+            .ForMember(v => v.IsAuction, opt => opt.MapFrom(vr => vr.IsAuction))
+            .ForMember(v => v.IsPaymentInParts, opt => opt.MapFrom(vr => vr.IsPaymentInParts))
+            .ForMember(v => v.IsTaxable, opt => opt.MapFrom(vr => vr.IsTaxable))
+            .ForMember(v => v.PhoneNumber, opt => opt.MapFrom(vr => vr.PhoneNumber))
+            .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
     }
 }
