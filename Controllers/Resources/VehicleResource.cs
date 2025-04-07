@@ -4,7 +4,7 @@ public class VehicleResource
 {
     public int Id { get; set; }
     public UserResource? User { get; set; }
-    public CarBrandResource Brand { get; set; }
+    public KeyValuePairResource Brand { get; set; }
     public CarModelResource Model { get; set; }
     public CarTypeResource CarType { get; set; }
     public TechStateResource TechState { get; set; }

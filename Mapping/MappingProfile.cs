@@ -10,6 +10,7 @@ public class MappingProfile : Profile
     {
         // Domain to API Resource
         CreateMap<CarBrands, CarBrandResource>();
+        CreateMap<CarBrands, KeyValuePairResource>();
         CreateMap<CarModel, CarModelResource>();
         CreateMap<CarType, CarTypeResource>();
         CreateMap<TechState, TechStateResource>();
