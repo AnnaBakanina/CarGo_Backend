@@ -15,11 +15,13 @@ public class MappingProfile : Profile
         CreateMap<TechState, TechStateResource>();
         CreateMap<City, CityResource>();
         CreateMap<Region, RegionResource>();
-        CreateMap<Vehicle, VehicleResource>();
+        CreateMap<Vehicle, SaveVehicleResource>();
+        CreateMap<Vehicle, VehicleResource>()
+            .ForMember(vr => vr.Brand, opt => opt.MapFrom(v => v.Model.Brand));
         
         // API Resource to Domain model
-        CreateMap<VehicleResource, Vehicle>()
-            .ForMember(v => v.Id, opt => opt.Ignore()) // Id не змінюємо при створенні
+        CreateMap<SaveVehicleResource, Vehicle>()
+            .ForMember(v => v.Id, opt => opt.Ignore())
             .ForMember(v => v.UserId, opt => opt.MapFrom(vr => vr.UserId))
             .ForMember(v => v.ModelId, opt => opt.MapFrom(vr => vr.ModelId))
             .ForMember(v => v.CarTypeId, opt => opt.MapFrom(vr => vr.CarTypeId))
