@@ -12,11 +12,13 @@ public class VehicleController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly CarGoDbContext _context;
+    private readonly IVehicleRepository _vehicleRepository;
 
-    public VehicleController(IMapper mapper, CarGoDbContext context)
+    public VehicleController(IMapper mapper, CarGoDbContext context, IVehicleRepository vehicleRepository)
     {
         _mapper = mapper;
         _context = context;
+        _vehicleRepository = vehicleRepository;
     }
 
     [HttpPost]
@@ -28,7 +30,9 @@ public class VehicleController : ControllerBase
         var vehicle = _mapper.Map<SaveVehicleResource, Vehicle>(saveVehicleResource);
         _context.Vehicles.Add(vehicle);
         await _context.SaveChangesAsync();
-        var result = _mapper.Map<Vehicle, SaveVehicleResource>(vehicle);
+        
+        vehicle = await _vehicleRepository.GetVehicleById(vehicle.Id);
+        var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
         return Ok(result);
     }
 
@@ -44,10 +48,11 @@ public class VehicleController : ControllerBase
         if (vehicle == null)
             return NotFound();
 
-        _mapper.Map<SaveVehicleResource, Vehicle>(saveVehicleResource, vehicle);
-
+        _mapper.Map(saveVehicleResource, vehicle);
         await _context.SaveChangesAsync();
-        var result = _mapper.Map<Vehicle, SaveVehicleResource>(vehicle);
+        
+        vehicle = await _vehicleRepository.GetVehicleById(id);
+        var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
         return Ok(result);
     }
 
@@ -69,18 +74,7 @@ public class VehicleController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetVehicle(int id)
     {
-        // var vehicle = await _context.Vehicles.FindAsync(id);
-        var vehicle = await _context.Vehicles
-            .Include(v => v.Model)
-            .Include(v => v.CarType)
-            .Include(v=> v.TechState)
-            .Include(v=> v.User)
-            .Include(v=>v.Model)
-            .ThenInclude(m=> m.Brand)
-            .SingleOrDefaultAsync(v => v.Id == id);
-
-        if (vehicle == null)
-            return NotFound();
+        var vehicle = await _vehicleRepository.GetVehicleById(id);
 
         var vehicleResource = _mapper.Map<Vehicle, VehicleResource>(vehicle);
         return Ok(vehicleResource);

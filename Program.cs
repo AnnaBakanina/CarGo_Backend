@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
