@@ -10,10 +10,10 @@ public class CarBrands
     [Required]
     [StringLength(255)]
     public string Name { get; set; }
-    public ICollection<CarModel> Models { get; set; }
+    public ICollection<CarModel> CarModel { get; set; }
 
     public CarBrands()
     {
-        Models = new Collection<CarModel>();
+        CarModel = new Collection<CarModel>();
     }
 }
