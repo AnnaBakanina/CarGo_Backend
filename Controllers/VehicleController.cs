@@ -72,4 +72,14 @@ public class VehicleController : ControllerBase
         var vehicleResource = _mapper.Map<Vehicle, VehicleResource>(vehicle);
         return Ok(vehicleResource);
     }
+    
+    // TODO: Test
+    [HttpGet("")]
+    public async Task<IActionResult> GetAllVehicle()
+    {
+        var vehicle = await _vehicleRepository.GetVehicles();
+
+        var vehicleResource = _mapper.Map<List<Vehicle>, List<VehicleResource>>(vehicle);
+        return Ok(vehicleResource);
+    }
 }
