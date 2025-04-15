@@ -21,6 +21,7 @@ public class User
     [Required]
     [StringLength(255)]
     public string PhoneNumber { get; set; }
+    public DateTime LastUpdated { get; set; }
     public ICollection<Vehicle> Vehicles { get; set; }
 
     public User()
