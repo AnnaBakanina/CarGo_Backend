@@ -20,7 +20,6 @@ public class UserController : ControllerBase
         _unitOfWork = unitOfWork;
     }
     
-    // TODO: Test
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] UserResource userResource)
     {
@@ -39,7 +38,15 @@ public class UserController : ControllerBase
         return Ok(result);
     }
     
-    // TODO: Test and finish this method
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetUser(int id)
+    {
+        var user = await _userRepository.GetUserById(id, includeRelated: false);
+        
+        var result = _mapper.Map<User, UserResource>(user);
+        return Ok(result);
+    }
+    
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateUser(int id, [FromBody] UserResource userResource)
     {
@@ -54,5 +61,15 @@ public class UserController : ControllerBase
         user = await _userRepository.GetUserById(id);
         var result = _mapper.Map<User, UserResource>(user);
         return Ok(result);
+    }
+    
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var user = await _userRepository.GetUserById(id, includeRelated: false);
+        
+        _userRepository.RemoveUser(user);
+        await _unitOfWork.CompleteAsync();
+        return Ok(id);
     }
 }

@@ -1,3 +1,5 @@
+using Backend.Models;
+
 namespace Backend.Controllers.Resources;
 
 public class VehicleResource
@@ -8,8 +10,10 @@ public class VehicleResource
     public CarModelResource Model { get; set; }
     public CarTypeResource CarType { get; set; }
     public TechStateResource TechState { get; set; }
+    public AdvertisementStatus? AdvertisementStatus { get; set; }
     
     public int YearOfRelease { get; set; }
+    public decimal Price { get; set; }
     public string VINNumber { get; set; }
     public int CarMileage { get; set; }
     public string Description { get; set; }

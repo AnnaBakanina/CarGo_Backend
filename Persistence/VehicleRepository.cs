@@ -22,6 +22,7 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.CarType)
             .Include(v=> v.TechState)
             .Include(v=> v.User)
+            .Include(s=> s.AdvertisementStatus)
             .Include(v=>v.Model)
             .ThenInclude(m=> m.Brand)
             .SingleOrDefaultAsync(v => v.Id == id) ?? throw new InvalidOperationException();
@@ -37,6 +38,7 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.CarType)
             .Include(v => v.TechState)
             .Include(v => v.User)
+            .Include(s=> s.AdvertisementStatus)
             .Include(v => v.Model)
             .ThenInclude(m => m.Brand)
             .ToListAsync();

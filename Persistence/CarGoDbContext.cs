@@ -15,4 +15,5 @@ public class CarGoDbContext : DbContext
     public DbSet<TechState> TechStates { get; set; }
     public DbSet<Region> Regions { get; set; }
     public DbSet<City> City { get; set; }
+    public DbSet<AdvertisementStatus> AdvertisementStatuses { get; set; }
 }

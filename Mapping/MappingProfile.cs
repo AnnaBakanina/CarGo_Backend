@@ -37,5 +37,8 @@ public class MappingProfile : Profile
             .ForMember(v => v.IsTaxable, opt => opt.MapFrom(vr => vr.IsTaxable))
             .ForMember(v => v.PhoneNumber, opt => opt.MapFrom(vr => vr.PhoneNumber))
             .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
+        CreateMap<UserResource, User>()
+            .ForMember(u => u.Id, opt => opt.Ignore())
+            .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
     }
 }

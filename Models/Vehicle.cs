@@ -29,15 +29,15 @@ public class Vehicle
     
     [MaxLength(2000)]
     public string Description { get; set; }
-    public string Price { get; set; }
+    public decimal Price { get; set; }
     public bool IsAuction { get; set; }
     public bool IsPaymentInParts { get; set; }
     public bool IsTaxable { get; set; }
     public DateTime LastUpdated { get; set; }
-    public AdvertisementStatus AdvertisementStatus { get; set; }
-    public int AdvertisementStatusId { get; set; }
     
     [Required]
     [MaxLength(20)]
     public string PhoneNumber { get; set; }
+    public AdvertisementStatus? AdvertisementStatus { get; set; }
+    public int? AdvertisementStatusId { get; set; }
 }
