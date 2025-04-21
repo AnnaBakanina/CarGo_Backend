@@ -28,20 +28,24 @@ public class VehicleRepository : IVehicleRepository
             .SingleOrDefaultAsync(v => v.Id == id) ?? throw new InvalidOperationException();
     }
 
-    public async Task<List<Vehicle>> GetVehicles(bool includeRelated = true)
+    public async Task<List<Vehicle>> GetVehicles(Filter filter, bool includeRelated = true)
     {
         if (!includeRelated)
             return await _context.Vehicles.ToListAsync();
-    
-        return await _context.Vehicles
+
+        var query = _context.Vehicles
             .Include(v => v.Model)
             .Include(v => v.CarType)
             .Include(v => v.TechState)
             .Include(v => v.User)
-            .Include(s=> s.AdvertisementStatus)
+            .Include(s => s.AdvertisementStatus)
             .Include(v => v.Model)
-            .ThenInclude(m => m.Brand)
-            .ToListAsync();
+            .ThenInclude(m => m.Brand).AsQueryable();
+        
+        if (filter.BrandId.HasValue)
+            query = query.Where(v => v.Model.BrandId == filter.BrandId.Value);
+        
+        return await query.ToListAsync();
     }
 
     public void AddVehicle(Vehicle vehicle)

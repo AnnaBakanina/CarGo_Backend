@@ -75,9 +75,10 @@ public class VehicleController : ControllerBase
     
     // TODO: Test
     [HttpGet("")]
-    public async Task<IActionResult> GetAllVehicle()
+    public async Task<IActionResult> GetAllVehicle(FilterResource filterResource)
     {
-        var vehicle = await _vehicleRepository.GetVehicles();
+        var filter = _mapper.Map<FilterResource, Filter>(filterResource);
+        var vehicle = await _vehicleRepository.GetVehicles(filter);
 
         var vehicleResource = _mapper.Map<List<Vehicle>, List<VehicleResource>>(vehicle);
         return Ok(vehicleResource);

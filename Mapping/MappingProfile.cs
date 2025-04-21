@@ -40,5 +40,6 @@ public class MappingProfile : Profile
         CreateMap<UserResource, User>()
             .ForMember(u => u.Id, opt => opt.Ignore())
             .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
+        CreateMap<FilterResource, Filter>();
     }
 }
