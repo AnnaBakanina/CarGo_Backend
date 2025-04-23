@@ -9,6 +9,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         // Domain to API Resource
+        CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
         CreateMap<CarBrands, CarBrandResource>();
         CreateMap<CarBrands, KeyValuePairResource>();
         CreateMap<CarModel, CarModelResource>();

@@ -30,10 +30,12 @@ public class VehicleRepository : IVehicleRepository
             .SingleOrDefaultAsync(v => v.Id == id) ?? throw new InvalidOperationException();
     }
 
-    public async Task<List<Vehicle>> GetVehicles(VehicleQuery vehicleQuery, bool includeRelated = true)
+    public async Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery vehicleQuery, bool includeRelated = true)
     {
-        if (!includeRelated)
-            return await _context.Vehicles.ToListAsync();
+        // if (!includeRelated)
+        //     return await _context.Vehicles.ToListAsync();
+        
+        var queryResult = new QueryResult<Vehicle>();
 
         var query = _context.Vehicles
             .Include(v => v.Model)
@@ -55,10 +57,12 @@ public class VehicleRepository : IVehicleRepository
             ["price"] = v => v.Price,
             ["lastUpdated"] = v => v.LastUpdated
         };
-
         query = query.ApplyOrdering(vehicleQuery, orderByExpressions);
+        queryResult.TotalItems = await query.CountAsync();
+        query = query.ApplyPaging(vehicleQuery);
         
-        return await query.ToListAsync();
+        queryResult.Data = await query.ToListAsync();
+        return queryResult;
     }
 
     public void AddVehicle(Vehicle vehicle)

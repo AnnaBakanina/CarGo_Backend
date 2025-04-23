@@ -17,4 +17,7 @@ public class VehicleQueryResource
     
     public int? CarMileageFrom { get; set; }
     public int? CarMileageTo { get; set; }
+    
+    public int Page { get; set; }
+    public int PageSize { get; set; }
 }
