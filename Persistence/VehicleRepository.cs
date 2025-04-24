@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using Backend.Extensions;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,24 +24,45 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.CarType)
             .Include(v=> v.TechState)
             .Include(v=> v.User)
+            .Include(s=> s.AdvertisementStatus)
             .Include(v=>v.Model)
             .ThenInclude(m=> m.Brand)
             .SingleOrDefaultAsync(v => v.Id == id) ?? throw new InvalidOperationException();
     }
 
-    public async Task<List<Vehicle>> GetVehicles(bool includeRelated = true)
+    public async Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery vehicleQuery, bool includeRelated = true)
     {
-        if (!includeRelated)
-            return await _context.Vehicles.ToListAsync();
-    
-        return await _context.Vehicles
+        // if (!includeRelated)
+        //     return await _context.Vehicles.ToListAsync();
+        
+        var queryResult = new QueryResult<Vehicle>();
+
+        var query = _context.Vehicles
             .Include(v => v.Model)
             .Include(v => v.CarType)
             .Include(v => v.TechState)
             .Include(v => v.User)
+            .Include(s => s.AdvertisementStatus)
             .Include(v => v.Model)
-            .ThenInclude(m => m.Brand)
-            .ToListAsync();
+            .ThenInclude(m => m.Brand).AsQueryable();
+        
+        if (vehicleQuery.BrandId.HasValue)
+            query = query.Where(v => v.Model.BrandId == vehicleQuery.BrandId.Value);
+        
+        if (vehicleQuery.ModelId.HasValue)
+            query = query.Where(v => v.ModelId == vehicleQuery.ModelId.Value);
+        
+        var orderByExpressions = new Dictionary<string, Expression<Func<Vehicle, object>>>()
+        {
+            ["price"] = v => v.Price,
+            ["lastUpdated"] = v => v.LastUpdated
+        };
+        query = query.ApplyOrdering(vehicleQuery, orderByExpressions);
+        queryResult.TotalItems = await query.CountAsync();
+        query = query.ApplyPaging(vehicleQuery);
+        
+        queryResult.Data = await query.ToListAsync();
+        return queryResult;
     }
 
     public void AddVehicle(Vehicle vehicle)
@@ -50,5 +73,10 @@ public class VehicleRepository : IVehicleRepository
     public void RemoveVehicle(Vehicle vehicle)
     {
         _context.Vehicles.Remove(vehicle);
+    }
+
+    private IQueryable<Vehicle> ApplyOrdering(VehicleQuery vehicleQuery, IQueryable<Vehicle> query, Dictionary<string, Expression<Func<Vehicle, object>>> orderByExpressions)
+    {
+        return vehicleQuery.IsSortAscending ? query.OrderBy(orderByExpressions[vehicleQuery.SortBy]) : query.OrderByDescending(orderByExpressions[vehicleQuery.SortBy]);
     }
 }
