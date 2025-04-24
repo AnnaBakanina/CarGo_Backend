@@ -1,6 +1,7 @@
 using AutoMapper;
 using Backend.Controllers.Resources;
 using Backend.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
