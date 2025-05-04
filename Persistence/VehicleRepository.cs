@@ -23,7 +23,7 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.Model)
             .Include(v => v.CarType)
             .Include(v=> v.TechState)
-            .Include(v=> v.User)
+            // .Include(v=> v.User)
             .Include(s=> s.AdvertisementStatus)
             .Include(v=>v.Model)
             .ThenInclude(m=> m.Brand)
@@ -41,7 +41,7 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.Model)
             .Include(v => v.CarType)
             .Include(v => v.TechState)
-            .Include(v => v.User)
+            // .Include(v => v.User)
             .Include(s => s.AdvertisementStatus)
             .Include(v => v.Model)
             .ThenInclude(m => m.Brand).AsQueryable();

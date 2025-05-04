@@ -25,7 +25,7 @@ public class MappingProfile : Profile
         // API Resource to Domain model
         CreateMap<SaveVehicleResource, Vehicle>()
             .ForMember(v => v.Id, opt => opt.Ignore())
-            .ForMember(v => v.UserId, opt => opt.MapFrom(vr => vr.UserId))
+            // .ForMember(v => v.UserId, opt => opt.MapFrom(vr => vr.UserId))
             .ForMember(v => v.ModelId, opt => opt.MapFrom(vr => vr.ModelId))
             .ForMember(v => v.CarTypeId, opt => opt.MapFrom(vr => vr.CarTypeId))
             .ForMember(v => v.TechStateId, opt => opt.MapFrom(vr => vr.TechStateId))
