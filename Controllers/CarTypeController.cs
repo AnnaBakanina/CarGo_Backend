@@ -19,7 +19,6 @@ public class CarTypeController: Controller
     }
     
     [HttpGet("/car-types")]
-    [Authorize]
     public async Task<IEnumerable<CarTypeResource>> GetCarTypes()
     {
         var carTypes = await _dbContext.CarTypes.ToListAsync();

@@ -20,10 +20,10 @@ public class VehicleRepository : IVehicleRepository
             return await _context.Vehicles.FindAsync(id);
         
         return await _context.Vehicles
-            .Include(v => v.Model)
             .Include(v => v.CarType)
             .Include(v=> v.TechState)
-            // .Include(v=> v.User)
+            .Include(v => v.City)
+            .ThenInclude(c=> c.Region)
             .Include(s=> s.AdvertisementStatus)
             .Include(v=>v.Model)
             .ThenInclude(m=> m.Brand)
@@ -38,10 +38,9 @@ public class VehicleRepository : IVehicleRepository
         var queryResult = new QueryResult<Vehicle>();
 
         var query = _context.Vehicles
-            .Include(v => v.Model)
+            .Include(v => v.City)
             .Include(v => v.CarType)
             .Include(v => v.TechState)
-            // .Include(v => v.User)
             .Include(s => s.AdvertisementStatus)
             .Include(v => v.Model)
             .ThenInclude(m => m.Brand).AsQueryable();

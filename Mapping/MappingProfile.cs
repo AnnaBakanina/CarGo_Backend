@@ -12,14 +12,17 @@ public class MappingProfile : Profile
         CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
         CreateMap<CarBrands, CarBrandResource>();
         CreateMap<CarBrands, KeyValuePairResource>();
+        CreateMap<CarModel, KeyValuePairResource>();
         CreateMap<CarModel, CarModelResource>();
         CreateMap<CarType, CarTypeResource>();
         CreateMap<TechState, TechStateResource>();
-        CreateMap<City, CityResource>();
+        CreateMap<City, KeyValuePairResource>();
         CreateMap<Region, RegionResource>();
+        CreateMap<Region, KeyValuePairResource>();
         CreateMap<Vehicle, SaveVehicleResource>();
         CreateMap<Vehicle, VehicleResource>()
-            .ForMember(vr => vr.Brand, opt => opt.MapFrom(v => v.Model.Brand));
+            .ForMember(vr => vr.Brand, opt => opt.MapFrom(v => v.Model.Brand))
+            .ForMember(vr => vr.Region, opt => opt.MapFrom(v => v.City.Region));
         CreateMap<User, UserResource>();
         
         // API Resource to Domain model
