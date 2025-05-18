@@ -45,11 +45,39 @@ public class VehicleRepository : IVehicleRepository
             .Include(v => v.Model)
             .ThenInclude(m => m.Brand).AsQueryable();
         
+        if (!string.IsNullOrEmpty(vehicleQuery.UserId))
+            query = query.Where(v => v.UserId == vehicleQuery.UserId);
+        
         if (vehicleQuery.BrandId.HasValue)
             query = query.Where(v => v.Model.BrandId == vehicleQuery.BrandId.Value);
         
         if (vehicleQuery.ModelId.HasValue)
             query = query.Where(v => v.ModelId == vehicleQuery.ModelId.Value);
+        
+        if (vehicleQuery.CarTypeId.HasValue)
+            query = query.Where(v => v.CarTypeId == vehicleQuery.CarTypeId.Value);
+        
+        if (vehicleQuery.TechStateId.HasValue)
+            query = query.Where(v => v.TechStateId == vehicleQuery.TechStateId.Value);
+        
+        if (vehicleQuery.RegionId.HasValue)
+            query = query.Where(v => v.City.RegionId == vehicleQuery.RegionId.Value);
+        
+        if (vehicleQuery.CityId.HasValue)
+            query = query.Where(v => v.CityId == vehicleQuery.CityId.Value);
+        
+        if (vehicleQuery.PriceFrom.HasValue)
+            query = query.Where(v => v.Price >= vehicleQuery.PriceFrom.Value);
+
+        if (vehicleQuery.PriceTo.HasValue)
+            query = query.Where(v => v.Price <= vehicleQuery.PriceTo.Value);
+
+        if (vehicleQuery.CarMileageFrom.HasValue)
+            query = query.Where(v => v.CarMileage >= vehicleQuery.CarMileageFrom.Value);
+
+        if (vehicleQuery.CarMileageTo.HasValue)
+            query = query.Where(v => v.CarMileage <= vehicleQuery.CarMileageTo.Value);
+
         
         var orderByExpressions = new Dictionary<string, Expression<Func<Vehicle, object>>>()
         {
