@@ -43,7 +43,7 @@ public class PhotosController: Controller
             await file.CopyToAsync(stream);
         }
         
-        // var photo = new Photo {FileName = fileName};
+        var photo = new Photo {FileName = fileName};
         // Vehicle.Photos.Add(photo);
         await _unitOfWork.CompleteAsync();
         

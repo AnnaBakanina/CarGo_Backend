@@ -28,6 +28,8 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -52,10 +54,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseCors(policy =>
-    policy.WithOrigins("http://localhost:4200")
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+app.UseCors(policy => policy
+    .WithOrigins("http://localhost:4200")
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseHttpsRedirection();
 app.UseRouting();
