@@ -5,11 +5,12 @@ namespace Backend.Controllers.Resources;
 public class VehicleResource
 {
     public int Id { get; set; }
-    public UserResource? User { get; set; }
     public KeyValuePairResource Brand { get; set; }
-    public CarModelResource Model { get; set; }
+    public KeyValuePairResource Model { get; set; }
     public CarTypeResource CarType { get; set; }
     public TechStateResource TechState { get; set; }
+    public KeyValuePairResource Region { get; set; }
+    public KeyValuePairResource City { get; set; }
     public AdvertisementStatus? AdvertisementStatus { get; set; }
     
     public int YearOfRelease { get; set; }

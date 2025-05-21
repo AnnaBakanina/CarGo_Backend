@@ -7,10 +7,8 @@ namespace Backend.Models;
 public class Vehicle
 {
     public int Id { get; set; }
-    
-    public User? User { get; set; }
-    public int? UserId { get; set; }
-    
+    [MaxLength(50)]
+    public string? UserId { get; set; }
     public int ModelId { get; set; }
     public CarModel Model { get; set; }
     
@@ -19,6 +17,8 @@ public class Vehicle
     
     public TechState TechState { get; set; }
     public int TechStateId { get; set; }
+    public City City { get; set; }
+    public int CityId { get; set; }
     
     public int YearOfRelease { get; set; }
     

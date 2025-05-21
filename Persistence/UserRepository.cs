@@ -30,7 +30,7 @@ public class UserRepository : IUserRepository
             return await _context.Users.FindAsync(id);
 
         return await _context.Users
-            .Include(v => v.Vehicles)
+            // .Include(v => v.Vehicles)
             .FirstOrDefaultAsync(u => u.Id == id) ?? throw new InvalidOperationException();
     }
 }

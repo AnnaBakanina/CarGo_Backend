@@ -2,6 +2,7 @@ using AutoMapper;
 using Backend.Controllers.Resources;
 using Backend.Models;
 using Backend.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -35,8 +36,8 @@ public class VehicleController : ControllerBase
         return Ok(result);
     }
 
-    // TODO: Test
     [HttpPut("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource saveVehicleResource)
     {
         if (!ModelState.IsValid)
@@ -52,8 +53,8 @@ public class VehicleController : ControllerBase
         return Ok(result);
     }
 
-    // TODO: Test
     [HttpDelete("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> DeleteVehicle(int id)
     {
         var vehicle = await _vehicleRepository.GetVehicleById(id, includeRelated: false);
@@ -63,7 +64,6 @@ public class VehicleController : ControllerBase
         return Ok(id);
     }
 
-    // TODO: Test
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetVehicle(int id)
     {
@@ -73,7 +73,6 @@ public class VehicleController : ControllerBase
         return Ok(vehicleResource);
     }
     
-    // TODO: Test
     [HttpGet("")]
     public async Task<QueryResultResource<VehicleResource>> GetAllVehicle(VehicleQueryResource vehicleQueryResource)
     {
