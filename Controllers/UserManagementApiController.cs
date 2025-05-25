@@ -65,6 +65,34 @@ public class UserManagementApiController: ControllerBase
         return Ok(await response.Content.ReadAsStringAsync());
     }
     
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetUserById(string id)
+    {
+        var token = await GetManagementApiToken();
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return StatusCode(500, "Unable to get Auth0 token");
+        }
+
+        var client = _httpClientFactory.CreateClient();
+
+        var request = new HttpRequestMessage(HttpMethod.Get, $"https://{_auth0Domain}/api/v2/users/{id}");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = await client.SendAsync(request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            return StatusCode((int)response.StatusCode, error);
+        }
+
+        var result = await response.Content.ReadAsStringAsync();
+        return Ok(JsonDocument.Parse(result));
+    }
+
+    
     [HttpGet("all-users")]
     public async Task<IActionResult> GetAllUsers()
     {

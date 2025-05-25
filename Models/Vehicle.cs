@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -40,4 +41,10 @@ public class Vehicle
     public string PhoneNumber { get; set; }
     public AdvertisementStatus? AdvertisementStatus { get; set; }
     public int? AdvertisementStatusId { get; set; }
+    public ICollection<Photo> Photos { get; set; }
+
+    public Vehicle()
+    {
+        Photos = new Collection<Photo>();
+    }
 }

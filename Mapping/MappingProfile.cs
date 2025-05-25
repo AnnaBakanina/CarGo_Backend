@@ -24,6 +24,7 @@ public class MappingProfile : Profile
             .ForMember(vr => vr.Brand, opt => opt.MapFrom(v => v.Model.Brand))
             .ForMember(vr => vr.Region, opt => opt.MapFrom(v => v.City.Region));
         CreateMap<User, UserResource>();
+        CreateMap<Photo, PhotoResource>();
         
         // API Resource to Domain model
         CreateMap<SaveVehicleResource, Vehicle>()
