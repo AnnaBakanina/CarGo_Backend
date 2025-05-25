@@ -56,6 +56,5 @@ public class PhotoController: Controller
         await _unitOfWork.CompleteAsync();
         
         return Ok(_mapper.Map<Photo, PhotoResource>(photo));
-        return Ok();
     }
 }
