@@ -17,12 +17,22 @@ public class PhotoController: Controller
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IVehicleRepository _vehicleRepository;
-    public PhotoController(IHostingEnvironment host, IUnitOfWork unitOfWork, IMapper mapper, IVehicleRepository vehicleRepository)
+    private readonly IPhotoRepository _photoRepository;
+    
+    public PhotoController(IHostingEnvironment host, IUnitOfWork unitOfWork, IMapper mapper, IVehicleRepository vehicleRepository, IPhotoRepository photoRepository)
     {
         _host = host;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _vehicleRepository = vehicleRepository;
+        _photoRepository = photoRepository;
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+    {
+        var photos = await _photoRepository.GetPhotos(vehicleId);
+        return _mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
     }
     
     [HttpPost]
