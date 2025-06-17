@@ -42,6 +42,7 @@ public class MappingProfile : Profile
             .ForMember(v => v.IsPaymentInParts, opt => opt.MapFrom(vr => vr.IsPaymentInParts))
             .ForMember(v => v.IsTaxable, opt => opt.MapFrom(vr => vr.IsTaxable))
             .ForMember(v => v.PhoneNumber, opt => opt.MapFrom(vr => vr.PhoneNumber))
+            .ForMember(v => v.AdvertisementStatusId, opt => opt.MapFrom(vr => vr.AdvertisementStatusId))
             .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
         CreateMap<UserResource, User>()
             .ForMember(u => u.Id, opt => opt.Ignore())

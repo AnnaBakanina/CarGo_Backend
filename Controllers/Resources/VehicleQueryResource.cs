@@ -9,6 +9,7 @@ public class VehicleQueryResource
     public int? TechStateId { get; set; }
     public int? RegionId { get; set; }
     public int? CityId { get; set; }
+    public int? AdvertisementStatusId { get; set; }
     
     public string SortBy { get; set; }
     public bool IsSortAscending { get; set; }

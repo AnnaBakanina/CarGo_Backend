@@ -77,6 +77,9 @@ public class VehicleRepository : IVehicleRepository
 
         if (vehicleQuery.CarMileageTo.HasValue)
             query = query.Where(v => v.CarMileage <= vehicleQuery.CarMileageTo.Value);
+        
+        if (vehicleQuery.AdvertisementStatusId.HasValue)
+            query = query.Where(v => v.AdvertisementStatusId == vehicleQuery.AdvertisementStatusId.Value);
 
         
         var orderByExpressions = new Dictionary<string, Expression<Func<Vehicle, object>>>()
