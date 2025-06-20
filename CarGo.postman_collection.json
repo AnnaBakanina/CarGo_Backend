@@ -1,0 +1,587 @@
+{
+	"info": {
+		"_postman_id": "e90ab4b1-f67e-4083-ad65-edc5d5630e1a",
+		"name": "CarGo",
+		"description": "Ця колекція описує всі наявні API методи для сайту CarGO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3874566"
+	},
+	"item": [
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Vehicle Data",
+					"item": [
+						{
+							"name": "Get Car Brands",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/car-brands",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"car-brands"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Car Type",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im9mVU1jX2prVjEwT3NHUEZuWjlFUiJ9.eyJpc3MiOiJodHRwczovL2Rldi00ZnN3aTVkd3htMTYybGpjLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJDSG5jamozMG5CeURFdTFabmhUSzdyMTdvQnBTQUpSbkBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9jYXJnby5jb20iLCJpYXQiOjE3NDU1NjA5NDIsImV4cCI6MTc0NTY0NzM0MiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiYXpwIjoiQ0huY2pqMzBuQnlERXUxWm5oVEs3cjE3b0JwU0FKUm4ifQ.CQ_D720SAgNfucVo4Xty75EtdfxTvLZYDIPuuy1-u_RhW6MyQrxECHl1KCK71gNhcQMzVk6NHLldrxm3uukVyNC0X-IXmHHR2rID9B3LVSRmk2Bn8HWyerTAXSaBkKRK4hkost0nYiUMjlnHWyWwWAgPINh8RlYzGZVWdze8KlWWJeIQ7ptzdRMynvi__m1X625q4iGbIfOOZprfE2w3xbrSvrrwHd-yIfpNVtlQWfWuv3VbfKgnmg0kPtA3Ob0VmB2fH3Ae9kxr6e9E5kfX8xPxWk8mJ4O6smAny45OF3zhihx5OgBecwZvG-n2H04ZDXvnBDelTYIzzfQ78AcpSw",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/car-types",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"car-types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tech State List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/car-tech-state",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"car-tech-state"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Regions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/regions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"regions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Advertisement Statuses",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/advertisement-statuses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"advertisement-statuses"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "В цій папці описані всі допоміжні методи для створення оголошення"
+				},
+				{
+					"name": "Photos",
+					"item": [
+						{
+							"name": "Upload Photo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/annabakanina/Downloads/Chevrolet-Silverado-EV-2025-00001-1280x715.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/vehicle/29/photos",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehicle",
+										"29",
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vehicle Photos",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vehicle/21/photos",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehicle",
+										"21",
+										"photos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"auth0|6810787578c1d68d85985bdb\",\n    \"modelId\": 9,\n    \"carTypeId\": 11,\n    \"techStateId\": 1,\n    \"cityId\": 45,\n    \"advertisementStatusId\": 1,\n    \"yearOfRelease\": 2012,\n    \"vinNumber\": \"123FFRTE5636\",\n    \"carMileage\": 105,\n    \"price\": \"43000\",\n    \"description\": \"NewDescription\",\n    \"isAuction\": false,\n    \"isPaymentInParts\": false,\n    \"IsTaxable\": false,\n    \"phoneNumber\": \"+380996888046\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vehicles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle By ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vehicles/22",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vehicles",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Update Vehicle",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{cargoApiToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"modelId\": 10,\n    \"carTypeId\": 11,\n    \"techStateId\": 1,\n    \"yearOfRelease\": 2012,\n    \"vinNumber\": \"54646DGF348\",\n    \"carMileage\": 78,\n    \"description\": \"NewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescriptionNewDescription\",\n    \"phoneNumber\": \"+380996888046\",\n    \"cityId\": 45,\n    \"price\": 25600,\n    \"advertisementStatusId\": 3,\n    \"isAuction\": false,\n    \"isPaymentInParts\": false,\n    \"isTaxable\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vehicles/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vehicles",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{cargoApiToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vehicles/22",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vehicles",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "В цій папці описані всі методи повʼязані з оголошеннями"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetManagementApiToken",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "{{auth0Domain}}/api/v2/",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{auth0Domain}}/oauth/token",
+							"host": [
+								"{{auth0Domain}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Data",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{managementApiToken}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"auth0|68176533a810172c4286507e\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"GeneralUser\",\n    \"phoneNumber\": \"+360992483695\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{auth0Domain}}/api/v2/users/auth0%7C68176533a810172c4286507e",
+							"host": [
+								"{{auth0Domain}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								"auth0%7C68176533a810172c4286507e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{managementApiToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{auth0Domain}}/api/v2/users",
+							"host": [
+								"{{auth0Domain}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{managementApiToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{auth0Domain}}/api/v2/users/auth0%7C68176533a810172c4286507e",
+							"host": [
+								"{{auth0Domain}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								"auth0%7C68176533a810172c4286507e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search Advertisements",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/vehicles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "brandId",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "modelId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "sortBy",
+							"value": "price",
+							"description": "Possible values: price, lastUpdated",
+							"disabled": true
+						},
+						{
+							"key": "isSortAscending",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "carTypeId",
+							"value": "9",
+							"disabled": true
+						},
+						{
+							"key": "techStateId",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "priceFrom",
+							"value": "80000",
+							"disabled": true
+						},
+						{
+							"key": "priceTo",
+							"value": "40000",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "auth0|6810787578c1d68d85985bdb",
+							"disabled": true
+						},
+						{
+							"key": "regionId",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "cityId",
+							"value": "45",
+							"disabled": true
+						},
+						{
+							"key": "carMileageFrom",
+							"value": "40000",
+							"disabled": true
+						},
+						{
+							"key": "carMileageTo",
+							"value": "100000",
+							"disabled": true
+						},
+						{
+							"key": "advertisementStatusId",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get CarGo Api Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"client_id\":\"CHncjj30nByDEu1ZnhTK7r17oBpSAJRn\",\n    \"client_secret\":\"Cx8WgOnJKGIREG79VS0-BJcqCTRYztmLZOTtIW0ebGKJbfFDv6RHd11Z4Az1XjEY\",\n    \"audience\":\"https://cargo.com\",\n    \"grant_type\":\"client_credentials\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{auth0Domain}}/oauth/token",
+					"host": [
+						"{{auth0Domain}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

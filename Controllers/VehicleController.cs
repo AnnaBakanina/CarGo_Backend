@@ -78,7 +78,6 @@ public class VehicleController : ControllerBase
     {
         var filter = _mapper.Map<VehicleQueryResource, VehicleQuery>(vehicleQueryResource);
         var queryResult = await _vehicleRepository.GetVehicles(filter);
-
         return _mapper.Map<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>(queryResult);
     }
 }

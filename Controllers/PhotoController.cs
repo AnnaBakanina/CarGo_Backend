@@ -1,4 +1,5 @@
 using AutoMapper;
+using Backend.Controllers.Resources;
 using Backend.Models;
 using Backend.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 namespace Backend.Controllers;
 
 [Route("/vehicle/{vehicleId}/photos")]
-public class PhotosController: Controller
+public class PhotoController: Controller
 {
     private readonly int MAX_FILE_SIZE = 10 * 1024 * 1024;
     private readonly string[] ACCEPTED_FILE_TYPES = ["jpg", "jpeg", "png"];
@@ -15,15 +16,32 @@ public class PhotosController: Controller
     private readonly IHostingEnvironment _host;
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    public PhotosController(IHostingEnvironment host, IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly IVehicleRepository _vehicleRepository;
+    private readonly IPhotoRepository _photoRepository;
+    
+    public PhotoController(IHostingEnvironment host, IUnitOfWork unitOfWork, IMapper mapper, IVehicleRepository vehicleRepository, IPhotoRepository photoRepository)
     {
         _host = host;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _vehicleRepository = vehicleRepository;
+        _photoRepository = photoRepository;
     }
 
+    [HttpGet]
+    public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+    {
+        var photos = await _photoRepository.GetPhotos(vehicleId);
+        return _mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
+    }
+    
+    [HttpPost]
     public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
     {
+        var vehicle = await _vehicleRepository.GetVehicleById(vehicleId, includeRelated: false);
+        if (vehicle == null)
+            return NotFound();
+        
         if (file == null || file.Length == 0)
             return BadRequest("File is empty");
         if (file.Length > MAX_FILE_SIZE)
@@ -44,10 +62,9 @@ public class PhotosController: Controller
         }
         
         var photo = new Photo {FileName = fileName};
-        // Vehicle.Photos.Add(photo);
+        vehicle.Photos.Add(photo);
         await _unitOfWork.CompleteAsync();
         
-        // return Ok(_mapper.Map<Photo, PhotoResource>(photo));
-        return Ok();
+        return Ok(_mapper.Map<Photo, PhotoResource>(photo));
     }
 }

@@ -24,6 +24,8 @@ public class MappingProfile : Profile
             .ForMember(vr => vr.Brand, opt => opt.MapFrom(v => v.Model.Brand))
             .ForMember(vr => vr.Region, opt => opt.MapFrom(v => v.City.Region));
         CreateMap<User, UserResource>();
+        CreateMap<Photo, PhotoResource>();
+        CreateMap<AdvertisementStatus, KeyValuePairResource>();
         
         // API Resource to Domain model
         CreateMap<SaveVehicleResource, Vehicle>()
@@ -40,6 +42,7 @@ public class MappingProfile : Profile
             .ForMember(v => v.IsPaymentInParts, opt => opt.MapFrom(vr => vr.IsPaymentInParts))
             .ForMember(v => v.IsTaxable, opt => opt.MapFrom(vr => vr.IsTaxable))
             .ForMember(v => v.PhoneNumber, opt => opt.MapFrom(vr => vr.PhoneNumber))
+            .ForMember(v => v.AdvertisementStatusId, opt => opt.MapFrom(vr => vr.AdvertisementStatusId))
             .ForMember(v => v.LastUpdated, opt => opt.MapFrom(_ => DateTime.UtcNow));
         CreateMap<UserResource, User>()
             .ForMember(u => u.Id, opt => opt.Ignore())
